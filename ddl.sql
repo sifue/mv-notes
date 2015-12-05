@@ -1,13 +1,16 @@
 create table posts (
 post_id serial primary key,
 note_name varchar(200),
-created_at date,
+created_at timestamp with time zone,
 data text
 );
 create index posts_note_name_created_at on posts (
   note_name,
   created_at
 );
+
+# drop
+drop table posts cascade;
 
 # follws test query
 insert into posts(note_name, created_at, data) values
