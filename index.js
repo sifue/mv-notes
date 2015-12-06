@@ -26,7 +26,7 @@
         return console.error('could not connect to postgres', err);
       }
       client.query(
-        'select post_id, note_name, created_at, data from posts where note_name = $1 order by created_at desc limit 5',
+        'select post_id, note_name, created_at, data from posts where note_name = $1 order by created_at desc limit 6',
         [noteName],
         function (err, result) {
           if (err) {

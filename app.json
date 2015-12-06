@@ -1,7 +1,7 @@
 {
   "name": "mv-notes",
   "description": "Notes web application for tkool MV",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "repository": "https://github.com/sifue/mv-notes",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express"],
   "image": "heroku/nodejs"

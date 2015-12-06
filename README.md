@@ -8,7 +8,7 @@ Finally you implements tkool mv plugin for this Note api.
 
 # Notes API
 ### GET /notes/:note_name/posts
-Get 5 posts of note. if you wanna change limit. Edit `index.js`.
+Get 6 posts of note. if you wanna change limit. Edit `index.js`.
 
 ### POST /notes/:note_name/posts
 Insert a post to note. data is all response body.
