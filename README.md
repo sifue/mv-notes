@@ -2,7 +2,6 @@
 This servise is a Notes(like a BBS) API for tkool mv games on Heroku.
 
 # How to use
-Edit allow domain of `index.js` and push heroku. if you want to use web game.
 Add postgre sql add-on and create table `ddl.sql` by `heroku pg:psql` command.
 Finally you implements tkool mv plugin for this Note api.
 

@@ -2,14 +2,14 @@
   'use strict';
   // Configure
   var conString = (process.env.DATABASE_URL || "postgres://postgres:postgres@localhost/postgres"); // if you wanna locally run, edit.
-  var allowOrigin = '*';  //!! Edit for your tkool application
     
   var express = require('express');
   var app = express();
+  var cors = require('cors');
   var pg = require('pg');
   app.set('port', (process.env.PORT || 5000));
   app.use(express.static(__dirname + '/public'));
-
+  app.use(cors());
   
   // GET
   app.get('/', function(req, res) {
@@ -20,7 +20,6 @@
     let noteName = req.params.note_name;
     let client = new pg.Client(conString);
     res.contentType('json');
-    res.header('Access-Control-Allow-Origin', allowOrigin);
     client.connect(function (err) {
       if (err) {
         return console.error('could not connect to postgres', err);
@@ -42,7 +41,6 @@
   var bodyParser = require('body-parser');
   app.use(bodyParser.json()); // for parsing application/json
   app.post('/notes/:note_name/posts', function(req, res) {
-    res.header('Access-Control-Allow-Origin', allowOrigin);
     let noteName = req.params.note_name;
     let client = new pg.Client(conString);
     client.connect(function (err) {
