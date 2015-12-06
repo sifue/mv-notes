@@ -57,17 +57,24 @@
         });
       
       // insert
-      client.query(
-        'insert into posts(note_name, created_at, data) values ($1, current_timestamp, $2)',
-        [noteName, JSON.stringify(req.body)],
-        function (err, result) {
-          if (err) {
-            return console.error('error running post insert query', err);
-          }
-          client.end();
-        });
+      var str = JSON.stringify(req.body);
+      // validation
+      if (str.length <= 1000) {
+        client.query(
+          'insert into posts(note_name, created_at, data) values ($1, current_timestamp, $2)',
+          [noteName, str],
+          function (err, result) {
+            if (err) {
+              return console.error('error running post insert query', err);
+            }
+            client.end();
+          });
+        res.json(['Post inserted to noteName:' + noteName]);
+      } else {
+        res.json(['Post size is too large. noteName:' + noteName]);
+      }
     });
-    res.json(['Post inserted to noteName:' + noteName]);
+    
   });
   
   // Start
