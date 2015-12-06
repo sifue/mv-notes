@@ -69,7 +69,7 @@
           client.end();
         });
     });
-    res.json(['Post inserted to noteName' + noteName]);
+    res.json(['Post inserted to noteName:' + noteName]);
   });
   
   // Start
