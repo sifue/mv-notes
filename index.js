@@ -2,7 +2,7 @@
   'use strict';
   // Configure
   var conString = (process.env.DATABASE_URL || "postgres://postgres:postgres@localhost/postgres"); // if you wanna locally run, edit.
-  var allowOrigin = 'http://sifue.github.io';  //!! Edit for your tkool application
+  var allowOrigin = '*';  //!! Edit for your tkool application
     
   var express = require('express');
   var app = express();
