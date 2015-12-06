@@ -49,12 +49,22 @@
       if (err) {
         return console.error('could not connect to postgres', err);
       }
+      // delete for heroku free limitation.
+      client.query(
+        'delete from posts where post_id in (select post_id from posts order by post_id desc offset 9999 limit 1);',
+        function (err, result) {
+          if (err) {
+            return console.error('error running post delete query', err);
+          }
+        });
+      
+      // insert
       client.query(
         'insert into posts(note_name, created_at, data) values ($1, current_timestamp, $2)',
         [noteName, JSON.stringify(req.body)],
         function (err, result) {
           if (err) {
-            return console.error('error running query', err);
+            return console.error('error running post insert query', err);
           }
           client.end();
         });

@@ -1,9 +1,12 @@
 # mv-notes
-This servise is a BBS api of tkool mv games on Heroku.
+This servise is a Notes(like a BBS) API for tkool mv games on Heroku.
+
+# How to use
 Edit allow domain of `index.js` and push heroku. if you want to use web game.
 Add postgre sql add-on and create table `ddl.sql` by `heroku pg:psql` command.
+Finally you implements tkool mv plugin for this Note api.
 
-# API
+# Notes API
 ### GET /notes/:note_name/posts
 Get 5 posts of note. if you wanna change limit. Edit `index.js`.
 
@@ -11,4 +14,4 @@ Get 5 posts of note. if you wanna change limit. Edit `index.js`.
 Insert a post to note. data is all response body.
 
 # LICENSE
-The MIT License
+MIT License
