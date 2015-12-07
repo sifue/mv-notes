@@ -7,6 +7,7 @@
   var app = express();
   var cors = require('cors');
   var pg = require('pg');
+  var crypto = require("crypto");
   app.set('port', (process.env.PORT || 5000));
   app.use(express.static(__dirname + '/public'));
   app.use(cors());
@@ -56,8 +57,12 @@
           }
         });
       
+      var content = req.body;
+      var sha256sum = crypto.createHash('sha256');
+      sha256sum.update(req.ip);
+      content.remote_address = sha256sum.digest('hex');
       // insert
-      var str = JSON.stringify(req.body);
+      var str = JSON.stringify(content);
       // validation
       if (str.length <= 1000) {
         client.query(
@@ -74,7 +79,6 @@
         res.json(['Post size is too large. noteName:' + noteName]);
       }
     });
-    
   });
   
   // Start
