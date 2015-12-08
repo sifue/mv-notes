@@ -12,7 +12,7 @@ Add these plugins by this order.
 
 # Notes API
 ### GET /notes/:note_name/posts
-Get 6 posts of note. if you wanna change limit. Edit `index.js`.
+Get 8 posts of note. if you wanna change limit. Edit `index.js`.
 
 ### POST /notes/:note_name/posts
 Insert a post to note. data is all response body.
