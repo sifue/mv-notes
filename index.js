@@ -26,7 +26,7 @@
         return console.error('could not connect to postgres', err);
       }
       client.query(
-        'select post_id, note_name, created_at, data from posts where note_name = $1 order by created_at desc limit 6',
+        'select post_id, note_name, created_at, data from posts where note_name = $1 order by created_at desc limit 8',
         [noteName],
         function (err, result) {
           if (err) {
@@ -42,6 +42,7 @@
   var bodyParser = require('body-parser');
   app.use(bodyParser.json()); // for parsing application/json
   app.post('/notes/:note_name/posts', function(req, res) {
+    console.log('Write requested ip:' + req.ip + ' body:' + JSON.stringify(req.body));
     let noteName = req.params.note_name;
     let client = new pg.Client(conString);
     client.connect(function (err) {
@@ -57,12 +58,18 @@
           }
         });
       
-      var content = req.body;
-      var sha256sum = crypto.createHash('sha256');
+      let content = req.body;
+      let splited = content.name.split('#');
+      if (splited[1]) {
+        let sha256sum = crypto.createHash('sha256');
+        sha256sum.update(splited[1]);
+        content.name = splited[0] + '◆' + sha256sum.digest('base64').substring(0, 7);
+      }
+      let sha256sum = crypto.createHash('sha256');
       sha256sum.update(req.ip);
-      content.remote_address = sha256sum.digest('hex');
+      content.remote_address = sha256sum.digest('base64');
       // insert
-      var str = JSON.stringify(content);
+      let str = JSON.stringify(content);
       // validation
       if (str.length <= 1000) {
         client.query(
